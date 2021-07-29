@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
@@ -9,50 +9,46 @@ const data = [
    {id: 2, personaje: "Name2", description: "Same2"},
 ];
 
-class App extends Component{
+const App = () => {
+//class App extends Component{
 
-   state = {
-      code: ""
-   };
+   const [ code, setCode ] = useState("");
 
-   handleAdd = async e => {
-      await this.setState({
-         text: e.target.value
-      })
+   const handleAdd = (e) => {
+      setCode(e.target.value);
    }
 
-   handleSubmit = e => {
-      e.preventDefault();
-      console.log(this.state.text);
+   const handleSubmit = () => {
 
-      let formData = new FormData();
+      // let formData = new FormData();
+      // let formData1 = new URLSearchParams();
+      // formData.append("code", code);
 
-      formData.append("code", this.state.code);
-      const url = "http://159.65.219.167/mod/react-attend/api/attend.php";
+      const data = {"code": code}
 
-      axios.post(url, formData)
+      const url = "https://halcory.com/mod/react-attend/api/attend.php?PHPSESSID=0c2da140ee4bf9596fd06c20487a48d3";
+
+      axios.post(url, data)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
    }
 
-   render(){
       return(
-      <>
-      <Container>
-      <FormGroup>
-      <label>Enter a code:</label>
-      <input 
-         onChange={this.handleAdd}
-         className="form-control mt-2 mb-2" 
-         placeholder="Enter the code" 
-         name="code"
-         type="number" 
-         />
-      </FormGroup>
-      <Button id="checkCode" onClick={this.handleSubmit} color="primary">Check code</Button>
-      </Container>
-      </>)
-   }
+         <Container>
+            <FormGroup>
+               <label className="mt-4">Enter a code:</label>
+               <input 
+                  onChange={ (e)=> handleAdd(e) }
+                  className="form-control mt-2 mb-2" 
+                  placeholder="Enter the code" 
+                  name="code"
+                  type="number"
+                  value={code}
+                  />
+            </FormGroup>
+            <Button id="checkCode" onClick={()=>{handleSubmit()}} color="primary">Check code</Button>
+         </Container>
+      )
 }
 
 export default App;
