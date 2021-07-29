@@ -1,5 +1,6 @@
 {
   "name": "tsugi-plugin",
+  "homepage": "https://react-plugin.test",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
