@@ -26,7 +26,7 @@ const App = () => {
 
       const data = {"code": code}
 
-      const url = "https://halcory.com/mod/react-attend/api/attend.php?PHPSESSID=0555a8029e9604f3f5d231ea1d114fcf";
+      const url = "https://halcory.com/mod/react-attend/api/attend.php?PHPSESSID=decbb3c2c619799a9828e31ba2f82ef6";
 
       axios.post(url, data)
       .then(res => console.log(res.data))
